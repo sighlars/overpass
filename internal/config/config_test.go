@@ -21,7 +21,7 @@ func TestLoadValidAppliesDefaults(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Load: %v", err)
 	}
-	if c.Listen != ":8080" || c.AdminListen != ":9090" || c.Strategy != "round_robin" {
+	if c.Listen != ":8080" || c.AdminListen != "127.0.0.1:9090" || c.Strategy != "round_robin" {
 		t.Fatalf("defaults not applied: %+v", c)
 	}
 	if c.Backends[0].HealthPath != "/" || c.Backends[0].MaxFails != 2 {
