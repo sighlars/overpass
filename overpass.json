@@ -1,0 +1,13 @@
+{
+  "listen": ":8080",
+  "admin_listen": ":9090",
+  "strategy": "round_robin",
+  "max_attempts": 3,
+  "health_every_ms": 5000,
+  "health_timeout_ms": 2000,
+  "backends": [
+    { "url": "http://localhost:9001", "health_path": "/healthz", "max_fails": 2, "fail_timeout_ms": 10000 },
+    { "url": "http://localhost:9002", "health_path": "/healthz", "max_fails": 2, "fail_timeout_ms": 10000 },
+    { "url": "http://localhost:9003", "health_path": "/healthz", "max_fails": 2, "fail_timeout_ms": 10000 }
+  ]
+}
