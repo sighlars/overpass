@@ -58,7 +58,9 @@ func (c *Config) Validate() error {
 		c.Listen = ":8080"
 	}
 	if c.AdminListen == "" {
-		c.AdminListen = ":9090"
+		// Localhost-only on purpose: the admin listener exposes
+		// drain/undrain. Bind 0.0.0.0 explicitly to expose it.
+		c.AdminListen = "127.0.0.1:9090"
 	}
 	if c.Strategy == "" {
 		c.Strategy = "round_robin"

@@ -82,6 +82,16 @@ Flags override the config file: `-listen :8080 -admin-listen :9090
 - **Shutdown:** SIGINT/SIGTERM stops listeners, gives 10s for drain, then
   halts the health loop. Client-cancelled requests abort retries immediately.
 
+## Security posture
+
+- The admin listener defaults to `127.0.0.1:9090` because it exposes
+  drain/undrain. Only bind it wider (e.g. `:9090`) behind a firewall or
+  with authentication in front — the API itself has no auth.
+- The Docker image runs as `nobody`, not root.
+- Servers set read/header/idle timeouts; no `WriteTimeout`, so SSE and
+  streaming responses are never cut mid-stream.
+- No secrets in config or code: everything the proxy needs is a URL.
+
 ## Test
 
 ```bash

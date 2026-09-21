@@ -1,6 +1,6 @@
 {
   "listen": ":8080",
-  "admin_listen": ":9090",
+  "admin_listen": "127.0.0.1:9090",
   "strategy": "round_robin",
   "max_attempts": 3,
   "health_every_ms": 5000,

@@ -65,11 +65,16 @@ func main() {
 		Addr:              cfg.Listen,
 		Handler:           pool,
 		ReadHeaderTimeout: 5 * time.Second,
+		ReadTimeout:       15 * time.Second,
+		IdleTimeout:       60 * time.Second,
+		// No WriteTimeout on purpose: it would kill SSE and streaming responses.
 	}
 	adminSrv := &http.Server{
 		Addr:              cfg.AdminListen,
 		Handler:           admin.New(pool, m, log),
 		ReadHeaderTimeout: 5 * time.Second,
+		ReadTimeout:       15 * time.Second,
+		IdleTimeout:       60 * time.Second,
 	}
 
 	errCh := make(chan error, 2)

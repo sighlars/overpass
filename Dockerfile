@@ -8,4 +8,6 @@ FROM alpine:3.20
 COPY --from=build /overpass /overpass
 COPY overpass.json /overpass.json
 EXPOSE 8080 9090
+# Drop privileges: the proxy needs no root capabilities.
+USER nobody
 ENTRYPOINT ["/overpass", "-config", "/overpass.json"]
